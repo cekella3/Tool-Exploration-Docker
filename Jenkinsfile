@@ -1,40 +1,27 @@
 pipeline {
-    agent { label "linux"}
+    agent any
     stages {
-        stage('build') {
+        stage('Package') {
+            agent{
+                docker{
+                    image 'maven:3.8.1-adoptopenjdk-11' 
+                }
+            }
             steps {
-                sh 'make' 
+                sh 'package' 
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
-        }
-        stage('buildimage') {
+        }   
+        stage('Build') {
+            agent{ dockerfile true}
             steps {
-                sh """
-                    docker build --tag myserver
-                    """
+                sh 'docker build --tag myserver'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'make check || true' 
-                junit '**/target/*.xml'
-            }
-        }
-        stage('run') {
-            steps {
-                sh """
-                    docker run -t -i --publish 5000:5000 myserver:latest
-                    """
-            }
-        }
-        stage('Deploy') {
-            when {
-              expression {
-                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-              }
-            }
-            steps {
-                sh 'make publish'
+        stage('Deploy'){
+            agent{ dockerfile true}
+            steps{
+                sh 'docker run -t -i --publish 5000:5000 myserver:latest'
             }
         }
     }
