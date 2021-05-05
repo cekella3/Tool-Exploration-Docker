@@ -8,8 +8,5 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FileServerTest {
     
-    public void testHandle()
-    {
-        MyHandler mh = new MyHandler();
-    }
+
 }
