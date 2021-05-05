@@ -11,6 +11,5 @@ public class FileServerTest {
     public void testHandle()
     {
         MyHandler mh = new MyHandler();
-        mh.handle("t");
     }
 }
