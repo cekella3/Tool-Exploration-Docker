@@ -4,11 +4,11 @@ pipeline {
         stage('Package') {
             agent{
                 docker{
-                    image 'maven:3.8.1-adoptopenjdk-11' 
+                    image 'maven:3.5.4' 
                 }
             }
             steps {
-                sh 'package' 
+                sh 'mvn package' 
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }   
