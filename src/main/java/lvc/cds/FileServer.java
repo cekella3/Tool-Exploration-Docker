@@ -21,6 +21,9 @@ public class FileServer {
         server.start();
     }
 
+
+
+    // my handler
     static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
