@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy'){
             agent any
             steps{
-                sh 'docker run -rm -i --publish 5000:5000 myserver:latest'
+                sh 'docker run --publish 5000:5000 myserver:latest'
             }
         }
     }
