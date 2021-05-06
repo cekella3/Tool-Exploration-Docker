@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy'){
             agent any
             steps{
-                sh 'docker restart -d --publish 7990:5000 myserver:latest'
+                sh 'docker restart --publish 7990:5000 myserver:latest'
             }
         }
     }
