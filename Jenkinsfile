@@ -25,7 +25,8 @@ pipeline {
         stage('Build') {
             agent any
             steps {
-                sh 'docker build --tag myserver'
+                sh 'pwd'
+                sh 'docker build . --tag myserver'
             }
         }
         stage('Deploy'){
