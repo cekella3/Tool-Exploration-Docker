@@ -23,13 +23,13 @@ pipeline {
             }
         }
         stage('Build') {
-            agent{ dockerfile true}
+            agent any
             steps {
                 sh 'docker build --tag myserver'
             }
         }
         stage('Deploy'){
-            agent{ dockerfile true}
+            agent any
             steps{
                 sh 'docker run -t -i --publish 5000:5000 myserver:latest'
             }
