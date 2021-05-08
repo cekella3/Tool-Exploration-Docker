@@ -32,7 +32,8 @@ pipeline {
         stage('Deploy'){
             agent any
             steps{
-                sh 'docker run -d --publish 6138:5000 myserver:latest'
+                sh 'docker stop myserver:latest'
+                sh 'docker run -d --publish 6137:5000 myserver:latest'
             }
         }
     }
